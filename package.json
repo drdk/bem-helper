@@ -1,0 +1,24 @@
+{
+  "name": "@dr/bem-helper",
+  "version": "1.0.0",
+  "description": "Helper to create BEM-style classnames",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/drdk/bem-helper.git"
+  },
+  "keywords": [
+    "bem",
+    "css",
+    "classname"
+  ],
+  "author": "Rasmus Fløe <rasmusfl0e@gmail.com>",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/drdk/bem-helper/issues"
+  },
+  "homepage": "https://github.com/drdk/bem-helper#readme"
+}
