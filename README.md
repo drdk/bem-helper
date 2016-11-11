@@ -63,7 +63,7 @@ A function that creates all applicable combinations of classnames for an element
 #### Arguments
 
 * `block` (string) - The block element for the classname.
-* additional arguments (string|object) - Optional. Elements are described by strings and modifiers are described by objects: keys are use as the modifier names and boolean values trigger whether the modifier is active, and any other type is used as a value; `{expanded: true}` > `"--expanded"`, `{rating: 3}` > `"--rating-3"`.
+* `...` (string|object) - Optional. Elements are described by strings and modifiers are described by objects: keys are use as the modifier names and boolean values trigger whether the modifier is active, and any other type is used as a value; `{expanded: true}` > `"--expanded"`, `{rating: 3}` > `"--rating-3"`.
 
 ### bem.single
 
