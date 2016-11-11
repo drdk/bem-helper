@@ -13,6 +13,12 @@ npm install @dr/bem-helper
 ```js
 var bem = require("@dr/bem-helper");
 
+var className = bem("dr-module", "list");
+// className === "dr-module__list"
+
+var className = bem("dr-module", { loaded: true });
+// className === "dr-module--loaded"
+
 
 // Get all applicable combinations for an element:
 var className = bem("dr-module", "list", { expanded: true });
@@ -63,7 +69,7 @@ A function that creates all applicable combinations of classnames for an element
 #### Arguments
 
 * `block` (string) - The block element for the classname.
-* `...` (string|object) - Optional. Elements are described by strings and modifiers are described by objects: keys are use as the modifier names and boolean values trigger whether the modifier is active, and any other type is used as a value; `{expanded: true}` > `"--expanded"`, `{rating: 3}` > `"--rating-3"`.
+* `...args` (string|object) - Optional. Elements are described by strings and modifiers are described by objects: keys are use as the modifier names and boolean values trigger whether the modifier is active, and any other type is used as a value; `{expanded: true}` > `"--expanded"`, `{rating: 3}` > `"--rating-3"`.
 
 ### bem.single
 
