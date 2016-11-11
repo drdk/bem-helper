@@ -10,7 +10,7 @@ npm install @dr/bem-helper
 
 ## Usage
 
-```
+```js
 var bem = require("@dr/bem-helper");
 
 
