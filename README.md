@@ -17,7 +17,7 @@ var className = bem("dr-module", "list");
 // className === "dr-module__list"
 
 var className = bem("dr-module", { loaded: true });
-// className === "dr-module--loaded"
+// className === "dr-module dr-module--loaded"
 
 
 // Get all applicable combinations for an element:
