@@ -46,9 +46,10 @@ var boundBem = bem.bind(null, block);
 var className = boundBem("list", { expanded: true });
 // className === "dr-module__list dr-module__list--expanded"
 
+var boundSingle = bem.single.bind(null, block);
 
 // Get a single scoped classname for an element:
-var className = bem.single("list", { expanded: true });
+var className = boundSingle("list", { expanded: true });
 // className === "dr-module__list--expanded"
 
 ```
