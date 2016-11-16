@@ -34,7 +34,7 @@ function modifierParser (modifiers) {
 }
 
 function modifierReducer (result, [modifier, value]) {
-	if (value !== false && value !== null && typeof value !== "undefined") {
+	if (value !== false && value !== "" && value !== null && typeof value !== "undefined") {
 		result.push(`--${modifier}${(value !== true) ? `-${value}` : "" }`);
 	}
 	return result;

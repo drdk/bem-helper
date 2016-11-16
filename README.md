@@ -14,7 +14,7 @@ npm install @dr/bem-helper
 var bem = require("@dr/bem-helper");
 
 var className = bem("dr-module", "list");
-// className === "dr-module__list"
+// className === "list dr-module__list"
 
 var className = bem("dr-module", { loaded: true });
 // className === "dr-module dr-module--loaded"
@@ -22,7 +22,7 @@ var className = bem("dr-module", { loaded: true });
 
 // Get all applicable combinations for an element:
 var className = bem("dr-module", "list", { expanded: true });
-// className === "dr-module__list dr-module__list--expanded"
+// className === "list dr-module__list list--expanded dr-module__list--expanded"
 
 
 // Get a single classname for an element:
@@ -34,7 +34,7 @@ var className = bem.single("dr-module", "list", { expanded: true });
 
 // Get all applicable combinations for an element:
 var className = bem("dr-module", "list", { expanded: true, rated: 3 });
-// className === "dr-module__list dr-module__list--expanded dr-module__list--rated-3"
+// className === "list dr-module__list list--expanded dr-module__list--expanded list--rated-3 dr-module__list--rated-3"
 
 
 // Get a single classname for an element:
@@ -50,7 +50,7 @@ var boundBem = bem.bind(null, block);
 
 // Get all applicable scoped combinations for an element:
 var className = boundBem("list", { expanded: true });
-// className === "dr-module__list dr-module__list--expanded"
+// className === "list dr-module__list list--expanded dr-module__list--expanded"
 
 var boundSingle = bem.single.bind(null, block);
 
