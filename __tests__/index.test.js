@@ -35,7 +35,7 @@ describe("bem", () => {
 		expect(bem("block", {modifier: ""})).toBe("block");
 	});
 
-	test("block with modifier with a number value", () => {
+	test("block with modifier with a value of a number", () => {
 		expect(bem("block", {modifier: 200})).toBe("block block--modifier-200");
 	});
 
@@ -96,7 +96,7 @@ describe("bem.single", () => {
 		expect(bem.single("block", {modifier: ""})).toBe("block");
 	});
 
-	test("block with modifier with a number value", () => {
+	test("block with modifier with a value of a number", () => {
 		expect(bem.single("block", {modifier: 200})).toBe("block--modifier-200");
 	});
 
