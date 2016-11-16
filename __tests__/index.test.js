@@ -1,4 +1,4 @@
-const bem = require("../src/index");
+const bem = require("../lib/index");
 
 describe("bem", () => {
 

@@ -1,12 +1,12 @@
 {
   "name": "@dr/bem-helper",
-  "version": "1.2.0",
+  "version": "1.2.1",
   "description": "Helper to create BEM-style classnames",
   "main": "lib/index.js",
   "scripts": {
     "test": "jest",
     "build": "babel src -d lib",
-    "prepublish": "npm test && npm run build"
+    "prepublish": "npm run && buildnpm test "
   },
   "repository": {
     "type": "git",
