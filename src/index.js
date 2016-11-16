@@ -1,8 +1,8 @@
-function BEM (...args) {
+function bem (...args) {
 	return argParser(...args).join(" ");
 }
 
-BEM.single = (...args) => argParser(...args).pop();
+bem.single = (...args) => argParser(...args).pop();
 
 function argParser (block, ...args) {
 	return args.reduce(argReducer, [block]);
@@ -20,7 +20,7 @@ function argReducer (result, value) {
 		);
 	}
 
-	return prefix(result, `__${value}`);
+	return [value].concat(prefix(result, `__${value}`));
 
 }
 
@@ -46,4 +46,4 @@ function prefix (prefixes, value) {
 	);
 }
 
-module.exports = BEM;
+module.exports = bem;
