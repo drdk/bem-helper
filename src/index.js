@@ -1,57 +1,72 @@
-const bem = (...args) => argParser(false, ...args).join(" ");
+/* @flow */
 
-bem.single = (...args) => argParser(true, ...args).pop();
+/*:: type Modifiers = { [key: string]: any }; */
+/*:: type Classnames = Array<string>; */
 
-bem.scoped = (...args) => argParser(true, ...args).join(" ");
+function bem (...args/*:any*/) /*:string*/ {
+	return argParser(false, ...args).join(" ");
+}
 
-module.exports = bem;
+function scoped (...args/*:any*/) /*:string*/ {
+	return argParser(true, ...args).join(" ");
+};
 
-function argParser (scoped, block, ...args) {
+function single (...args/*:any*/) /*:string*/ {
+	return argParser(true, ...args).pop();
+};
+
+function argParser (scoped/*:boolean*/, block/*:string*/, ...args/*:any*/) /*:Classnames*/ {
 	return args.reduce(argReducer(scoped), [block]);
 }
 
-function argReducer (scoped) {
+function argReducer (scoped/*:boolean*/) {
 
-	return function (result, value) {
+	return function (result/*:any*/, value/*:any*/) /*:Classnames*/ {
 		if (typeof value === "object") {
-			return modifers(result, value);
+			return modifers(result, value, "--");
 		}
 
-		var prefixed = prefix(result, `__${value}`);
+		var prefixed = concat(result, value, "__");
 
 		return (scoped) ? prefixed : [value].concat(prefixed);
 	}
 
 }
 
-function modifers(result, value) {
+function modifers(result/*:Classnames*/, value/*:Modifiers*/, delimiter/*:string*/) /*:Classnames*/ {
 	return result.concat(
 		modifierParser(value)
 		.reduce(
-			(subresult, modifier) => subresult.concat(prefix(result, modifier)),
+			(subresult/*:Classnames*/, modifier/*:string*/) => subresult.concat(concat(result, modifier, delimiter)),
 			[]
 		)
 	);
 }
 
-function modifierParser (modifiers) {
+function modifierParser (modifiers/*:Modifiers*/) /*:Classnames*/ {
 	return Object.keys(modifiers).map(
-		(modifier) => [modifier, modifiers[modifier]]
+		(modifier/*:string*/) => [modifier, modifiers[modifier]]
 	).reduce(
 		modifierReducer,
 		[]
 	);
 }
 
-function modifierReducer (result, [modifier, value]) {
+function modifierReducer (result/*:Classnames*/, [modifier/*:string*/, value/*:any*/]) /*:Classnames*/ {
 	if (value !== false && value !== "" && value !== null && typeof value !== "undefined") {
-		result.push(`--${modifier}${(value !== true) ? `-${value}` : "" }`);
+		result.push(`${modifier}${(value !== true) ? `-${value}` : "" }`);
 	}
 	return result;
 }
 
-function prefix (prefixes, value) {
+function concat (prefixes/*:Classnames*/, value/*:string*/, delimiter/*:string*/) /*:Classnames*/ {
 	return prefixes.map(
-		(prefix) => `${prefix}${value}`
+		(prefix/*:string*/) => `${prefix}${delimiter}${value}`
 	);
 }
+
+module.exports = bem;
+
+module.exports.scoped = scoped;
+
+module.exports.single = single;
