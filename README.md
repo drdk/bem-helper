@@ -9,12 +9,15 @@ var className = bem("block", "element", {modifier: true});
 
 /*
 
-className == "element block__element element--modifier block__element--modifier"
-
-bem.scoped            ^^^^^^^^^^^^^^                   ^^^^^^^^^^^^^^^^^^^^^^^^
-
-bem.single                                             ^^^^^^^^^^^^^^^^^^^^^^^^
-
+className ==  "element block__element element--modifier block__element--modifier"
+                             |                                   |    |
+                       ______|          _________________________|    |
+                      \/               \/                             |
+bem.scoped == "block__element block__element--modifier"               |
+                                                                      |
+                         _____________________________________________|
+                        \/
+bem.single == "block__element--modifier"
 */
 ```
 
@@ -41,6 +44,10 @@ var className = bem("block", "element", { modifier: true });
 // className === "element block__element element--modifier block__element--modifier"
 
 
+// Get all applicable combinations scoped combinations for an element:
+var className = bem.scoped("block", "element", { modifier: true });
+// className === "block__element block__element--modifier"
+
 // Get a single classname for an element:
 var className = bem.single("block", "element", { modifier: true });
 // className === "block__element--modifier"
@@ -52,6 +59,9 @@ var className = bem.single("block", "element", { modifier: true });
 var className = bem("block", "element", { modifier: "value", modifier2: false });
 // className === "element block__element element--modifier block__element--modifier element--modifier-value block__element--modifier-value"
 
+// Get all applicable scoped combinations for an element:
+var className = bem.scoped("block", "element", { modifier: "value", modifier2: false });
+// className === "block__element block__element--modifier block__element--modifier-value"
 
 // Get a single classname for an element:
 var className = bem.single("block", "element", { modifier: "value" });
@@ -64,13 +74,19 @@ var block = "block";
 
 var boundBem = bem.bind(null, block);
 
-// Get all applicable scoped combinations for an element:
+// Get all applicable combinations for an element:
 var className = boundBem("element", { modifier: true });
 // className === "element block__element element--modifier block__element--modifier"
 
+var boundScoped = bem.scoped.bind(null, block);
+
+// Get all applicable scoped combinations for an element:
+var className = boundScoped("element", { modifier: true });
+// className === "block__element block__element--modifier"
+
 var boundSingle = bem.single.bind(null, block);
 
-// Get a single scoped classname for an element:
+// Get a single classname for an element:
 var className = boundSingle("element", { modifier: true });
 // className === "block__element--modifier"
 
