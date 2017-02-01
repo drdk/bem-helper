@@ -10,6 +10,7 @@ var className = bem("block", "element", {modifier: true});
 /*
 
 className ==  "element block__element element--modifier block__element--modifier"
+                       ______________                   ________________________
                              |                                   |    |
                        ______|          _________________________|    |
                       \/               \/                             |
