@@ -16,6 +16,7 @@ className ==  "element block__element element--modifier block__element--modifier
                       \/               \/                             |
 bem.scoped == "block__element block__element--modifier"               |
                                                                       |
+                                                                      |
                          _____________________________________________|
                         \/
 bem.single == "block__element--modifier"
@@ -102,7 +103,7 @@ A function that creates all applicable combinations of classnames for an element
 #### Arguments
 
 * `block` (string) - The block element for the classname.
-* `...args` (string|object) - Optional. Elements are described by strings and modifiers are described by objects: keys are use as the modifier names and boolean values trigger whether the modifier is active, and any other type is used as a value; `{modifier: true}` > `"--modifier"`, `{modifier: "value"}` > `"--modifier-value"`.
+* `...args` (string|object) - Optional. Elements are described by strings and modifiers are described by objects: keys are used for modifier names - boolean values trigger whether the modifier is active, and any other value type is used as a value; `{modifier: true}` > `"--modifier"`, `{modifier: "value"}` > `"--modifier-value"`.
 
 ### bem.scoped
 
