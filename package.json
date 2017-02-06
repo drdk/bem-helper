@@ -1,7 +1,7 @@
 {
   "name": "@dr/bem-helper",
   "version": "1.2.2",
-  "description": "Helper to create BEM-style classnames",
+  "description": "Helper functions to create BEM-style classnames",
   "main": "lib/index.js",
   "scripts": {
     "test": "jest --no-watchman",

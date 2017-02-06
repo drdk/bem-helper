@@ -1,37 +1,37 @@
 # bem-helper
 
-> Helper to create BEM-style classnames
+> Helper functions to create BEM-style classnames
 
 
 ```js
 
 var className = bem("block", "element", {modifier: true});
+// className ==  "element block__element element--modifier block__element--modifier"
+//                        ^^^^^^^^^^^^^^                   ^^^^^^^^^^^^^^^^^^^^^^^^
+//                        _____/             ______________________/    /
+//                       /                  /                          /
+// bem.scoped == "block__element block__element--modifier"            /
+//                                                                   /
+//                            ______________________________________/
+//                           /
+// bem.single == "block__element--modifier"
 
-/*
-
-className ==  "element block__element element--modifier block__element--modifier"
-                       ______________                   ________________________
-                             |                                   |    |
-                       ______|          _________________________|    |
-                      \/               \/                             |
-bem.scoped == "block__element block__element--modifier"               |
-                                                                      |
-                                                                      |
-                         _____________________________________________|
-                        \/
-bem.single == "block__element--modifier"
-*/
 ```
 
 ## Install
 
 ```
+
 npm install @dr/bem-helper
+
 ```
 
 ## Usage
 
+#### Basic
+
 ```js
+
 var bem = require("@dr/bem-helper");
 
 var className = bem("block", "element");
@@ -40,6 +40,11 @@ var className = bem("block", "element");
 var className = bem("block", { modifier: true });
 // className === "block block--modifier"
 
+```
+
+#### Elements with modifiers
+
+```js
 
 // Get all applicable combinations for an element:
 var className = bem("block", "element", { modifier: true });
@@ -54,8 +59,11 @@ var className = bem.scoped("block", "element", { modifier: true });
 var className = bem.single("block", "element", { modifier: true });
 // className === "block__element--modifier"
 
+```
 
-// Modifiers with values
+#### Modifiers with values
+
+```js
 
 // Get all applicable combinations for an element:
 var className = bem("block", "element", { modifier: "value", modifier2: false });
@@ -69,8 +77,11 @@ var className = bem.scoped("block", "element", { modifier: "value", modifier2: f
 var className = bem.single("block", "element", { modifier: "value" });
 // className === "block__element--modifier-value"
 
+```
 
-// Prebinding a helper
+#### Prebinding helpers
+
+```js
 
 var block = "block";
 
