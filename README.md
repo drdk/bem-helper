@@ -8,12 +8,12 @@
 var className = bem("block", "element", {modifier: true});
 // className ==  "element block__element element--modifier block__element--modifier"
 //                        ^^^^^^^^^^^^^^                   ^^^^^^^^^^^^^^^^^^^^^^^^
-//                        _____/             ______________________/    /
-//                       /                  /                          /
-// bem.scoped == "block__element block__element--modifier"            /
-//                                                                   /
-//                            ______________________________________/
-//                           /
+//                         _____/              _____________________/
+//                        /                   /
+// bem.scoped == "block__element block__element--modifier"
+//                               ^^^^^^^^^^^^^^^^^^^^^^^^
+//                              ___________/
+//                             /
 // bem.single == "block__element--modifier"
 
 ```
