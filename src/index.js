@@ -3,6 +3,14 @@
 /*:: type Modifiers = { [key: string]: any }; */
 /*:: type Classnames = Array<string>; */
 
+const SCOPED/*:string*/ = "SCOPED";
+const UNSCOPED/*:string*/ = "UNSCOPED";
+
+const argReducers = {
+	[SCOPED]: argReducer(true),
+	[UNSCOPED]: argReducer(false)
+};
+
 function bem (...args/*:any*/) /*:string*/ {
 	return argParser(false, ...args).join(" ");
 }
@@ -16,10 +24,10 @@ function single (...args/*:any*/) /*:string*/ {
 };
 
 function argParser (scoped/*:boolean*/, block/*:string*/, ...args/*:any*/) /*:Classnames*/ {
-	return args.reduce(argReducer(scoped), [block]);
+	return args.reduce(argReducers[scoped ? SCOPED : UNSCOPED], [block]);
 }
 
-function argReducer (scoped/*:boolean*/) {
+function argReducer (scoped/*:boolean*/) /*:(result: any, value: any) => Classnames*/ {
 
 	return function (result/*:any*/, value/*:any*/) /*:Classnames*/ {
 		if (typeof value === "object") {
