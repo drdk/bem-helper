@@ -17,11 +17,11 @@ function bem (...args/*:any*/) /*:string*/ {
 
 function scoped (...args/*:any*/) /*:string*/ {
 	return argParser(true, ...args).join(" ");
-};
+}
 
 function single (...args/*:any*/) /*:string*/ {
 	return argParser(true, ...args).pop();
-};
+}
 
 function argParser (scoped/*:boolean*/, block/*:string*/, ...args/*:any*/) /*:Classnames*/ {
 	return args.reduce(argReducers[scoped ? SCOPED : UNSCOPED], [block]);
@@ -37,7 +37,7 @@ function argReducer (scoped/*:boolean*/) /*:(result: any, value: any) => Classna
 		var prefixed = concat(result, value, "__");
 
 		return (scoped) ? prefixed : [value].concat(prefixed);
-	}
+	};
 
 }
 
