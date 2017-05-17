@@ -2,22 +2,6 @@
 
 > Helper functions to create [BEM](https://en.bem.info/methodology/naming-convention/#two-dashes-style)-style classnames
 
-
-```js
-
-var className = bem("block", "element", {modifier: true});
-// className === "element block__element element--modifier block__element--modifier"
-//                        ^^^^^^^^^^^^^^                   ^^^^^^^^^^^^^^^^^^^^^^^^
-//                         _____/              _____________________/
-//                        /                   /
-// bem.scoped -> "block__element block__element--modifier"
-//                               ^^^^^^^^^^^^^^^^^^^^^^^^
-//                              ___________/
-//                             /
-// bem.single -> "block__element--modifier"
-
-```
-
 ## Install
 
 ```
@@ -34,6 +18,14 @@ var bem = require("@dr/bem-helper");
 
 var className = bem("block", "element", { modifier: true });
 // className === "element block__element element--modifier block__element--modifier"
+//                        ^^^^^^^^^^^^^^                   ^^^^^^^^^^^^^^^^^^^^^^^^
+//                         _____/              _____________________/
+//                        /                   /
+// bem.scoped -> "block__element block__element--modifier"
+//                               ^^^^^^^^^^^^^^^^^^^^^^^^
+//                              ___________/
+//                             /
+// bem.single -> "block__element--modifier"
 
 ```
 
