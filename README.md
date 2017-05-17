@@ -72,7 +72,7 @@ var className = bem("block", "element");
 ```js
 
 var className = bem("block", "element", { modifier: true });
-// className === "block__element--modifier"
+// className === "element block__element element--modifier block__element--modifier"
 
 ```
 
