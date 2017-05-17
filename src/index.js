@@ -3,8 +3,8 @@
 /*:: type Modifiers = { [key: string]: any }; */
 /*:: type Classnames = Array<string>; */
 
-const SCOPED/*:string*/ = "SCOPED";
-const UNSCOPED/*:string*/ = "UNSCOPED";
+const SCOPED = "SCOPED";
+const UNSCOPED = "UNSCOPED";
 
 const argReducers = {
 	[SCOPED]: argReducer(true),
