@@ -1,4 +1,4 @@
-const bem = require("../lib/index");
+const bem = require("../index");
 
 describe("bem.scoped", () => {
 

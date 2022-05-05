@@ -2,12 +2,12 @@
   "name": "@dr/bem-helper",
   "version": "1.2.4",
   "description": "Helper functions to create BEM-style classnames",
-  "main": "lib/index.js",
+  "main": "./index.js",
+  "types": "./types.d.ts",
   "scripts": {
     "test": "jest --no-watchman",
-    "build": "babel src -d lib",
-    "prepublish": "npm run build && npm test",
-    "flow": "flow check"
+    "build": "tsc index.js --allowJs --declaration --emitDeclarationOnly --declarationMap",
+    "prepublish": "npm run build && npm test"
   },
   "repository": {
     "type": "git",
@@ -25,12 +25,7 @@
   },
   "homepage": "https://github.com/drdk/bem-helper#readme",
   "devDependencies": {
-    "babel-cli": "^6.22.2",
-    "babel-jest": "^19.0.0",
-    "babel-plugin-transform-flow-comments": "^6.22.0",
-    "babel-polyfill": "^6.22.0",
-    "babel-preset-es2015": "^6.22.0",
-    "flow-bin": "^0.44.2",
-    "jest": "^19.0.2"
+    "jest": "^28.0.3",
+    "typescript": "^4.6.4"
   }
 }
