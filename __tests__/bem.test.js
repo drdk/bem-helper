@@ -1,4 +1,4 @@
-const bem = require("../lib/index");
+import bem from "../index.js";
 
 describe("bem", () => {
 
@@ -7,7 +7,7 @@ describe("bem", () => {
 	});
 
 	test("block and element", () => {
-		expect(bem("block", "element")).toBe("element block__element");
+		expect(bem("block", "element")).toBe("block__element");
 	});
 
 	test("block with modifier with a value of true", () => {
@@ -44,19 +44,19 @@ describe("bem", () => {
 	});
 
 	test("block and element with modifier", () => {
-		expect(bem("block", "element", {modifier: true})).toBe("element block__element element--modifier block__element--modifier");
+		expect(bem("block", "element", {modifier: true})).toBe("block__element block__element--modifier");
 	});
 
 	test("block and element with multiple modifiers", () => {
-		expect(bem("block", "element", {modifier1: true, modifier2: "value"})).toBe("element block__element element--modifier1 block__element--modifier1 element--modifier2-value block__element--modifier2-value");
+		expect(bem("block", "element", {modifier1: true, modifier2: "value"})).toBe("block__element block__element--modifier1 block__element--modifier2-value");
 	});
 
 	test("block with modifier and element", () => {
-		expect(bem("block", {modifier: true}, "element")).toBe("element block__element block--modifier__element");
+		expect(bem("block", {modifier: true}, "element")).toBe("block__element block--modifier__element");
 	});
 
 	test("block with modifier and element with modifier", () => {
-		expect(bem("block", {modifier: true}, "element", {modifier: true})).toBe("element block__element block--modifier__element element--modifier block__element--modifier block--modifier__element--modifier");
+		expect(bem("block", {modifier: true}, "element", {modifier: true})).toBe("block__element block--modifier__element block__element--modifier block--modifier__element--modifier");
 	});
 
 });
