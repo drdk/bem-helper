@@ -11,6 +11,6 @@
 ### Features
 
 * The package is now an ESM module.
-* `bem.unscoped` and `bem.single` was deprecated.
-* `bem.scoped` is now just `bem` - the default export.
-* Added the `bemStyles` function to make BEM classnames from CSS module styles.
+* `bem.unscoped`, `bem.scoped`, and `bem.single` was deprecated.
+* The default export is now the `bemHelper` factory that returns a bem function with prebound parameters.
+* `bemHelper` supports CSS module styles via a second parameter (`styles`).

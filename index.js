@@ -1,60 +1,80 @@
-function build(block, ...args) {
-	return args.reduce(
-		(result, value) => {
-			if (typeof value === "object") {
-				return appendModifers(result, value);
-			}
-			return append(result, `__${value}`);
-		},
-		[block]
-	);
+// @ts-check
+
+/** @typedef {import("./types").Styles} Styles */
+/** @typedef {import("./types").ClassNames} ClassNames */
+/** @typedef {import("./types").Modifiers} Modifiers */
+/** @typedef {import("./types").ModifierValue} ModifierValue */
+
+/**
+ * A helper function that returns a function to create BEM-style classnames, prebound with the parameters given.
+ * CSS modules is supported via the `styles` param.
+ * @param {string} block - The block element.
+ * @param {Styles | undefined} [styles] - An optional CSS modules styles object.
+ * @returns {import("./types").BoundBem}}
+ */
+
+export default function bemHelper(block, styles) {
+	if (typeof block !== "string") {
+		throw new Error("@dr/bem-helper did not receive a valid `block` argument");
+	}
+	return bem.bind(undefined, styles, block);
 }
 
-function appendModifers(result, modifiers) {
-	return result.concat(
-		Object.keys(modifiers).map(
-			(modifier) => [modifier, modifiers[modifier]]
-		).reduce(
-			(subresult, [modifier, value]) => {
-				if (isTruthy(value)) {
-					subresult.push(`${modifier}${(value === true) ? "" : `-${value}` }`);
-				}
-				return subresult;
-			},
-			[]
-		)
-		.reduce(
-			(subresult, modifier) => subresult.concat(append(result, `--${modifier}`)),
-			[]
-		)
-	);
+/**
+ * A function that returns BEM-style classnames.
+ * @param {Styles | undefined} styles - Optional CSS modules styles object. Prebound by `bemHelper`.
+ * @param {string} block - The block element for the classname. Prebound by `bemHelper`.
+ * @param {string | Modifiers | undefined} [element] - The block element for the classname.
+ * @param {Modifiers | undefined} [modifiers] - An optional modifier (object); Keys are used for modifier names. Values determine whether to turn the modifier off (`false`, `""`, `null` or `undefined`) or on - either through `true` or a value which will be appended to the modifier name; `{modifier: true}` -> `"--modifier"`, `{modifier: "value"}` -> `"--modifier-value"`.
+ * @returns {string}
+ */
+
+function bem(styles, block, element, modifiers) {
+	if (typeof element !== "string" && !modifiers) {
+		[element, modifiers] = [modifiers, element];
+	}
+
+	const rootClassName = element ? `${block}__${element}` : block;
+
+	let classNames = modifiers
+		? getClassNamesWithModifiers(rootClassName, modifiers)
+		: [rootClassName];
+
+	if (styles) {
+		classNames = classNames.map((className) => styles[className]);
+	}
+
+	return classNames.join(" ");
 }
+
+/**
+ * @param {ModifierValue} value
+ * @returns {boolean}
+ */
 
 function isTruthy(value) {
-	return (value !== false && value !== "" && value !== null && typeof value !== "undefined");
-}
-
-function append(classnames, suffix) {
-	return classnames.map(
-		(classname) => `${classname}${suffix}`
+	return (
+		value !== false &&
+		value !== "" &&
+		value !== null &&
+		typeof value !== "undefined"
 	);
 }
 
 /**
- * A function that creates all applicable combinations of classnames for an element scoped to a block in BEM-style format.
- * @param {string} block - The block element for the classname.
- * @param {...(string|object)} args - Any number of the following arguments are allowed:
- *   An element (string) - or a modifier (object); Keys are used for modifier names. Values determine whether to turn the modifier off (`false`, `""`, `null` or `undefined`) or on - either through `true` or a value which will be appended to the modifier name; `{modifier: true}` -> `"--modifier"`, `{modifier: "value"}` -> `"--modifier-value"`.
- * Should not follow a previous modifier argument.
+ * @param {string} rootClassName
+ * @param {Modifiers} modifiers
+ * @returns {ClassNames}
  */
-const bem = (...args) => build(...args).join(" ");
 
-/**
- * A function that builds a BEM-style classname from a CSS modules styles object and `bem` parameters.
- * @param {object} styles - The CSS modules styles object.
- * @param {string} block - The block element for the classname.
- * @param {...(string|object)} args - See `args` param of `bem`.
- */
-export const bemStyles = (styles, ...args) => build(...args).map((className) => styles[className]).join(" ");
-
-export default bem;
+function getClassNamesWithModifiers(rootClassName, modifiers) {
+	const result = [rootClassName];
+	for (const [modifier, value] of Object.entries(modifiers)) {
+		if (isTruthy(value)) {
+			result.push(
+				`${rootClassName}--${modifier}${value === true ? "" : `-${value}`}`
+			);
+		}
+	}
+	return result;
+}

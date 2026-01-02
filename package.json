@@ -1,11 +1,16 @@
 {
   "name": "@dr/bem-helper",
   "version": "2.0.0",
-  "description": "Helper functions to create BEM-style classnames",
+  "description": "Helper function to create BEM-style classnames",
   "type": "module",
   "main": "./index.js",
+  "types": "./types",
   "scripts": {
-    "test": "node --experimental-vm-modules node_modules/jest/bin/jest.js --no-watchman --config=./config.json",
+    "test": "npm run test:vitest && npm run test:lint",
+    "test:vitest": "vitest run",
+    "test:coverage": "vitest run --coverage",
+    "test:lint": "biome check",
+    "test:lint:fix": "biome check --fix",
     "prepublish": "npm test"
   },
   "repository": {
@@ -17,16 +22,14 @@
     "css",
     "classname"
   ],
-  "author": {
-    "name": "phloe",
-    "email": "mail@phloe.industries"
-  },
   "license": "ISC",
   "bugs": {
     "url": "https://github.com/drdk/bem-helper/issues"
   },
   "homepage": "https://github.com/drdk/bem-helper#readme",
   "devDependencies": {
-    "jest": "^28.1.0"
+    "@biomejs/biome": "^2.3.10",
+    "@vitest/coverage-v8": "^4.0.16",
+    "vitest": "^4.0.16"
   }
 }
