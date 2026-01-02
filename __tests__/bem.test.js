@@ -3,7 +3,9 @@ import bh from "../index.js";
 describe("bem helper", () => {
 	describe("should fail", () => {
 		test("without block", () => {
-			expect(() => bh()).toThrowError("@dr/bem-helper did not receive a valid `block` argument");
+			expect(() => bh()).toThrowError(
+				"@dr/bem-helper did not receive a valid `block` argument"
+			);
 		});
 	});
 
