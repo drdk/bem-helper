@@ -14,39 +14,83 @@ npm install @dr/bem-helper
 
 ```js
 
-var bem = require("@dr/bem-helper");
+import bh from "@dr/bem-helper";
 
-var className = bem("block", "element", { modifier: true });
-// className === "element block__element element--modifier block__element--modifier"
-//                        ^^^^^^^^^^^^^^                   ^^^^^^^^^^^^^^^^^^^^^^^^
-//                         _____/              _____________________/
-//                        /                   /
-// bem.scoped -> "block__element block__element--modifier"
-//                               ^^^^^^^^^^^^^^^^^^^^^^^^
-//                              ___________/
-//                             /
-// bem.single -> "block__element--modifier"
+// At the top of your component; create a bem function with prebound parameters:
+const bem = bh('block');
+
+// Further down; use the bem function to output BEM-style classnames:
+return (
+  <div className={bem()}>
+    <div className={bem("element", { modifier: true })}>
+      { /*  */ }
+    </div>;
+  </div>
+);
+
+// equals:
+// <div className="block">
+//   <div className="block__element block__element--modifier">
+//     { /*  */ }
+//   </div>;
+// </div>
 
 ```
 
+
+#### With CSS modules
+
+To use @dr/bem-helper with CSS modules, import your styles as an object as usual.
+Then just add the `styles` object as a second parameter when creating the bem function: 
+
+```js
+
+import bh from "@dr/bem-helper";
+
+import styles from "./MyComponent.module.scss";
+
+// At the top of your component; create a bem function with prebound parameters:
+const bem = bh('block', styles);
+
+// Further down; use the bem function to output BEM-style classnames:
+return (
+  <div className={bem()}>
+    <div className={bem("element", { modifier: true })}>
+      { /*  */ }
+    </div>;
+  </div>
+);
+
+// equals:
+// <div className="block__f874i">
+//   <div className="block__element__hxvxn block__element--modifier__nb3t8">
+//     { /*  */ }
+//   </div>;
+// </div>
+
+```
 
 
 ## API
 
+* [bemHelper](#bemHelper)
 * [bem](#bem)
-* [bem.scoped](#bemscoped)
-* [bem.single](#bemsingle)
 
-### bem
 
-A function that creates all applicable combinations of classnames for an element in BEM-style.
+### bemHelper
+
+A helper function that returns a function to create BEM-style classnames, prebound with the parameters given.
+
+CSS modules is supported via the `styles` param.
 
 #### Arguments
 
-* `block` (string) - The block element for the classname.
-* `...args` (string|object) - Optional. Any number of the following arguments are allowed:
-  * `element` (string) - Optional.
-  * `modifier` (object) - Optional. Keys are used for modifier names. Values determine whether to turn the modifier off (`false`, `""`, `null` or `undefined`) or on - either through `true` or a value which will be appended to the modifier name; `{modifier: true}` -> `"--modifier"`, `{modifier: "value"}` -> `"--modifier-value"`. Should not follow a previous modifier argument.
+* `block` (string) - The block element.
+* `styles` (object) - An optional CSS modules styles object.
+
+#### Returns
+
+A bem function with prebound parameters.
 
 #### Examples
 
@@ -54,44 +98,36 @@ A function that creates all applicable combinations of classnames for an element
 
 ```js
 
-var className = bem("block", "element");
-// className === "element block__element"
+import bh from "@dr/bem-helper";
+
+const bem = bh('block');
 
 ```
 
-###### Elements with modifiers
+###### With CSS modules
 
 ```js
 
-var className = bem("block", "element", { modifier: true });
-// className === "element block__element element--modifier block__element--modifier"
+import bh from "@dr/bem-helper";
+
+import styles from "./MyComponent.module.scss";
+
+const bem = bh('block', styles);
 
 ```
 
-###### Modifiers with values
+### bem
 
-```js
+A function that returns BEM-style classnames.
 
-var className = bem("block", "element", { modifier: "value", modifier2: false });
-// className === "element block__element element--modifier-value block__element--modifier-value"
+#### Arguments
 
-```
+* `element` (string) - Optional. The element for the classname.
+* `modifier` (object) - An optional modifier (object); Keys are used for modifier names. Values determine whether to turn the modifier off (`false`, `""`, `null` or `undefined`) or on - either through `true` or a value which will be appended to the modifier name; `{modifier: true}` -> `"--modifier"`, `{modifier: "value"}` -> `"--modifier-value"`.
 
-###### Prebinding helpers
+#### Returns
 
-```js
-
-var boundBem = bem.bind(null, "block");
-
-var className = boundBem("element", { modifier: true });
-// className === "element block__element element--modifier block__element--modifier"
-
-```
-
-
-### bem.scoped
-
-Same as [bem](#bem) - but it returns a fully scoped classname.
+A string with BEM-style classnames.
 
 #### Examples
 
@@ -99,80 +135,31 @@ Same as [bem](#bem) - but it returns a fully scoped classname.
 
 ```js
 
-var className = bem.scoped("block", "element");
+const bem = bh('block');
+
+var className = bem("element");
 // className === "block__element"
 
 ```
 
-###### Elements with modifiers
+###### With modifiers
 
 ```js
 
-var className = bem.scoped("block", { modifier: true });
+const bem = bh('block');
+
+var className = bem({ modifier: true });
 // className === "block block--modifier"
 
 ```
 
-###### Modifiers with values
+###### Element and modifiers with values
 
 ```js
 
-var className = bem.scoped("block", "element", { modifier: "value", modifier2: false });
+const bem = bh('block');
+
+var className = bem("element", { modifier: "value", modifier2: false });
 // className === "block__element block__element--modifier-value"
-
-```
-
-###### Prebinding helpers
-
-```js
-
-var boundScoped = bem.scoped.bind(null, "block");
-
-var className = boundScoped("element", { modifier: true });
-// className === "block__element block__element--modifier"
-
-```
-
-### bem.single
-
-Same as [bem](#bem) - but it only returns a single classname.
-
-#### Examples
-
-###### Basic
-
-```js
-
-var className = bem.single("block", "element");
-// className === "block__element"
-
-```
-
-###### Elements with modifiers
-
-```js
-
-var className = bem.single("block", "element", { modifier: true });
-// className === "block__element--modifier"
-
-```
-
-###### Modifiers with values
-
-```js
-
-var className = bem.single("block", "element", { modifier: "value" });
-// className === "block__element--modifier-value"
-
-```
-
-###### Prebinding helpers
-
-```js
-
-var boundSingle = bem.single.bind(null, "block");
-
-var className = boundSingle("element", { modifier: true });
-// className === "block__element--modifier"
 
 ```
