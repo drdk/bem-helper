@@ -30,8 +30,11 @@ export default function bemHelper(block, styles) {
  */
 
 function bem(styles, block, element, modifiers) {
-	if (typeof element !== "string" && !modifiers) {
-		[element, modifiers] = [modifiers, element];
+	if (element && typeof element !== "string") {
+		if (typeof element === "object") {
+			modifiers = element;
+		}
+		element = undefined;
 	}
 
 	const rootClassName = element ? `${block}__${element}` : block;
