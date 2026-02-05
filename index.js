@@ -15,7 +15,7 @@
 
 export default function bemHelper(block, styles) {
 	if (typeof block !== "string") {
-		throw new Error("@dr/bem-helper did not receive a valid `block` argument");
+		throw new Error("@drdk/bem-helper did not receive a valid `block` argument");
 	}
 	return bem.bind(undefined, styles, block);
 }

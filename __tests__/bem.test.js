@@ -4,7 +4,7 @@ describe("bem helper", () => {
 	describe("should fail", () => {
 		test("without block", () => {
 			expect(() => bh()).toThrowError(
-				"@dr/bem-helper did not receive a valid `block` argument"
+				"@drdk/bem-helper did not receive a valid `block` argument"
 			);
 		});
 	});
