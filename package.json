@@ -32,7 +32,7 @@
   "homepage": "https://github.com/drdk/bem-helper#readme",
   "devDependencies": {
     "@biomejs/biome": "^2.3.10",
-    "@drdk/drdk-cli": "^2.0.6-dev.1",
+    "@drdk/drdk-cli": "^2.0.6",
     "@vitest/coverage-v8": "^4.0.16",
     "vitest": "^4.0.16"
   }
