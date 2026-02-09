@@ -6,7 +6,7 @@
 
 ```
 
-npm install @dr/bem-helper
+npm install @drdk/bem-helper
 
 ```
 
@@ -14,7 +14,7 @@ npm install @dr/bem-helper
 
 ```js
 
-import bh from "@dr/bem-helper";
+import bh from "@drdk/bem-helper";
 
 // At the top of your component; create a bem function with prebound parameters:
 const bem = bh('block');
@@ -40,12 +40,12 @@ return (
 
 #### With CSS modules
 
-To use @dr/bem-helper with CSS modules, import your styles as an object as usual.
+To use @drdk/bem-helper with CSS modules, import your styles as an object as usual.
 Then just add the `styles` object as a second parameter when creating the bem function: 
 
 ```js
 
-import bh from "@dr/bem-helper";
+import bh from "@drdk/bem-helper";
 
 import styles from "./MyComponent.module.scss";
 
@@ -98,7 +98,7 @@ A bem function with prebound parameters.
 
 ```js
 
-import bh from "@dr/bem-helper";
+import bh from "@drdk/bem-helper";
 
 const bem = bh('block');
 
@@ -108,7 +108,7 @@ const bem = bh('block');
 
 ```js
 
-import bh from "@dr/bem-helper";
+import bh from "@drdk/bem-helper";
 
 import styles from "./MyComponent.module.scss";
 

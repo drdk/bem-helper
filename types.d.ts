@@ -13,7 +13,7 @@ export type BoundBem = {
 	(element: string, modifiers: Modifiers): string;
 };
 
-declare module "@dr/bem-helper" {
+declare module "@drdk/bem-helper" {
 	function bemHelper(block: string, styles?: Styles): BoundBem;
 
 	export default bemHelper;
