@@ -4,7 +4,7 @@
   "description": "Helper function to create BEM-style classnames",
   "type": "module",
   "main": "./index.js",
-  "types": "./types",
+  "types": "./types.d.ts",
   "scripts": {
     "test": "npm run test:vitest && npm run test:lint",
     "test:vitest": "vitest run",
